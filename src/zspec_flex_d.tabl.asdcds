@@ -1,0 +1,19 @@
+@EndUserText.label : 'Flex Specification Header - Draft'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zspec_flex_d {
+
+  key client           : abap.clnt not null;
+  key specid           : abap.char(20) not null;
+  specdescription      : abap.char(100);
+  delflag              : abap_boolean;
+  createdby            : abp_creation_user;
+  createdat            : abp_creation_tstmpl;
+  lastchangedby        : abp_lastchange_user;
+  lastchangedat        : abp_lastchange_tstmpl;
+  locallastchanged     : abp_locinst_lastchange_tstmpl;
+  "%admin"             : include sych_bdl_draft_admin_inc;
+
+}

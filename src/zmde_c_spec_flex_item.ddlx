@@ -1,0 +1,29 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo: {
+  typeName: 'Specification Attribute',
+  typeNamePlural: 'Specification Attributes',
+  title: { type: #STANDARD, value: 'AttributeId' },
+  description: { type: #STANDARD, value: 'AttributeValue' }
+}
+
+annotate entity ZC_SPEC_FLEX_ITEM with
+{
+  /* =========================================================
+     FIELD ANNOTATIONS (Item Table in Object Page)
+     ========================================================= */
+
+  @UI.hidden: true
+  Specid;
+
+  @EndUserText.label: 'No.'
+  @UI.lineItem: [{ position: 10, importance: #HIGH, label: 'No.' }]
+  Counter;
+
+  @EndUserText.label: 'Attribute'
+  @UI.lineItem: [{ position: 20, importance: #HIGH, label: 'Attribute' }]
+  AttributeId;
+
+  @EndUserText.label: 'Value'
+  @UI.lineItem: [{ position: 30, importance: #HIGH, label: 'Value' }]
+  AttributeValue;
+}

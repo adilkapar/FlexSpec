@@ -1,0 +1,82 @@
+managed implementation in class ZBP_R_SPEC_FLEX unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_SPEC_FLEX alias SpecFlex
+persistent table zspec_flex
+draft table zspec_flex_d
+lock master total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChanged
+early numbering
+{
+  field ( readonly )
+  Specid,
+  CreatedBy,
+  CreatedAt,
+  LastChangedBy,
+  LastChangedAt,
+  LocalLastChanged;
+
+  create;
+  update;
+  // No physical delete – soft delete via deletion flag
+  // delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  // Static action for Excel upload
+  static action UploadExcel parameter ZA_FLEX_UPLOAD result [0..*] $self;
+
+  // Deletion flag actions
+  action SetDeletionFlag result [1] $self;
+  action RemoveDeletionFlag result [1] $self;
+
+  // Composition to items
+  association _Items { create; with draft; }
+
+  mapping for zspec_flex corresponding
+    {
+      Specid           = specid;
+      SpecDescription  = spec_description;
+      DelFlag          = del_flag;
+      CreatedBy        = created_by;
+      CreatedAt        = created_at;
+      LastChangedBy    = last_changed_by;
+      LastChangedAt    = last_changed_at;
+      LocalLastChanged = local_last_changed;
+    }
+}
+
+define behavior for ZR_SPEC_FLEX_ITEM alias SpecFlexItem
+persistent table zspec_flex_i
+draft table zspec_flex_i_d
+lock dependent by _Header
+authorization dependent by _Header
+etag dependent by _Header
+early numbering
+{
+  field ( readonly )
+  Specid,
+  Counter;
+
+  update;
+  delete;
+
+  field ( mandatory )
+  AttributeId;
+
+  association _Header { with draft; }
+
+  mapping for zspec_flex_i corresponding
+    {
+      Specid         = specid;
+      Counter        = counter;
+      AttributeId    = attribute_id;
+      AttributeValue = attribute_value;
+    }
+}

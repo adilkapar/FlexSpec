@@ -1,0 +1,15 @@
+@EndUserText.label : 'Flex Spec - Characteristic Mapping Config'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #C
+@AbapCatalog.dataMaintenance : #ALLOWED
+define table zspec_flex_cmap {
+
+  key client       : abap.clnt not null;
+  key logical_field : abap.char(30) not null;
+  charc_name       : abap.char(30);
+  description      : abap.char(60);
+  sort_order       : abap.numc(4);
+  is_mandatory     : abap_boolean;
+
+}

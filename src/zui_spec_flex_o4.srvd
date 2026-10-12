@@ -1,0 +1,7 @@
+@EndUserText.label: 'Flex Specification - Service Definition'
+define service ZUI_SPEC_FLEX_O4 {
+  expose ZC_SPEC_FLEX      as SpecFlex;
+  expose ZC_SPEC_FLEX_ITEM as SpecFlexItem;
+  expose ZVH_FLEX_ATTRIBUTES  as FlexAttributes;
+  expose ZVH_FLEX_ATTR_VALUES as FlexAttrValues;
+}

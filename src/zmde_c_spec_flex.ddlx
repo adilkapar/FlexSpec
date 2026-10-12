@@ -1,0 +1,87 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo: {
+  typeName: 'Flex Specification',
+  typeNamePlural: 'Flex Specifications',
+  title: { type: #STANDARD, value: 'Specid' },
+  description: { type: #STANDARD, value: 'SpecDescription' }
+}
+
+annotate entity ZC_SPEC_FLEX with
+{
+  /* =========================================================
+     FACET DEFINITIONS (Detail Page Layout)
+     ========================================================= */
+  @UI.facet: [
+    { id: 'General',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'General Information',
+      position: 10 },
+    { id: 'Attributes',
+      purpose: #STANDARD,
+      type: #LINEITEM_REFERENCE,
+      label: 'Specification Attributes',
+      targetElement: '_Items',
+      position: 20 },
+    { id: 'Admin',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      label: 'Administrative Data',
+      targetQualifier: 'Admin',
+      position: 30 }
+  ]
+
+  /* =========================================================
+     FIELD ANNOTATIONS
+     ========================================================= */
+
+  @EndUserText.label: 'Specification ID'
+  @UI: {
+    lineItem: [
+      { position: 10, importance: #HIGH, label: 'Specification ID' },
+      { type: #FOR_ACTION, dataAction: 'SetDeletionFlag', label: 'Set Deletion Flag' },
+      { type: #FOR_ACTION, dataAction: 'RemoveDeletionFlag', label: 'Remove Deletion Flag' }
+    ],
+    identification: [
+      { position: 10, label: 'Specification ID' },
+      { type: #FOR_ACTION, dataAction: 'SetDeletionFlag', label: 'Set Deletion Flag', position: 100 },
+      { type: #FOR_ACTION, dataAction: 'RemoveDeletionFlag', label: 'Remove Deletion Flag', position: 110 }
+    ],
+    selectionField: [{ position: 10 }]
+  }
+  Specid;
+
+  @EndUserText.label: 'Description'
+  @UI: {
+    lineItem: [{ position: 20, importance: #HIGH, label: 'Description' }],
+    identification: [{ position: 20, label: 'Description' }],
+    selectionField: [{ position: 20 }]
+  }
+  SpecDescription;
+
+  @EndUserText.label: 'Deletion Flag'
+  @UI: {
+    lineItem: [{ position: 90, importance: #HIGH, label: 'Deletion Flag' }],
+    identification: [{ position: 90, label: 'Deletion Flag' }],
+    selectionField: [{ position: 90 }]
+  }
+  DelFlag;
+
+  /* --- Administrative Data --- */
+
+  @EndUserText.label: 'Created By'
+  @UI.fieldGroup: [{ qualifier: 'Admin', position: 10, label: 'Created By' }]
+  CreatedBy;
+
+  @EndUserText.label: 'Created At'
+  @UI.fieldGroup: [{ qualifier: 'Admin', position: 20, label: 'Created At' }]
+  CreatedAt;
+
+  @EndUserText.label: 'Last Changed By'
+  @UI.fieldGroup: [{ qualifier: 'Admin', position: 30, label: 'Last Changed By' }]
+  LastChangedBy;
+
+  @EndUserText.label: 'Last Changed At'
+  @UI.fieldGroup: [{ qualifier: 'Admin', position: 40, label: 'Last Changed At' }]
+  LastChangedAt;
+}

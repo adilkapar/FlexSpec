@@ -1,0 +1,14 @@
+@EndUserText.label : 'Flex Specification Items (EAV)'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zspec_flex_i {
+
+  key client         : abap.clnt not null;
+  key specid         : abap.char(20) not null;
+  key counter        : abap.numc(5) not null;
+  attribute_id       : abap.char(30);
+  attribute_value    : abap.char(70);
+
+}
